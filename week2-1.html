@@ -152,6 +152,7 @@ axios.post( `${this.apiurl}/v2/api/user/check`  )
 })
 .catch( (err)=> {
   console.log('認證失敗');
+  window.location = 'index.html';
  
 })
 
