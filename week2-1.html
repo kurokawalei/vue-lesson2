@@ -31,6 +31,7 @@
       <div class="row py-3">
         <div class="col-md-6">
           <h2>產品列表</h2>
+         <button type="button" v-if="products.length !== 0 " class="btn btn-primary" @click="out">登出</button>
           <table class="table table-hover mt-4">
             <thead>
               <tr>
@@ -156,6 +157,23 @@ axios.post( `${this.apiurl}/v2/api/user/check`  )
 
 
 },
+out(){
+
+  axios.post(`${this.apiurl}/v2/logout`)
+  .then( (res) => {
+
+    console.log(res.data);
+    //登出轉向
+    window.location = 'index.html';
+
+  })
+  .catch( (err)=> {
+    console.log(err);
+  } )
+
+
+}
+,
 
       getlist(){
 
