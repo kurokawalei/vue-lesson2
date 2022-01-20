@@ -31,7 +31,7 @@
       <div class="row py-3">
         <div class="col-md-6">
           <h2>產品列表</h2>
-         <button type="button" v-if="products.length !== 0 " class="btn btn-primary" @click="out">登出</button>
+          <button type="button" v-if="products.length !== 0 " class="btn btn-primary" @click="out">登出</button>
           <table class="table table-hover mt-4">
             <thead>
               <tr>
@@ -57,7 +57,7 @@
                   {{ item.origin_price }}
                 </td>
                 <td width="120">
-                  {{ item.price  }}
+                  {{ item.price }}
                 </td>
                 <td width="150">
                   <span class="text-success" v-if="item.is_enabled !== 0 ">啟用</span>
@@ -70,8 +70,9 @@
             </tbody>
           </table>
           <p>目前有
-          
-            <span>{{ products.length }}</span> 項產品</p>
+
+            <span>{{ products.length }}</span> 項產品
+          </p>
         </div>
         <div class="col-md-6">
           <h2>單一產品細節</h2>
@@ -81,7 +82,7 @@
               <div class="card-body">
                 <h5 class="card-title">
                   {{ temp.title }}
-                  <span class="badge bg-primary ms-2">{{ temp.category  }}</span>
+                  <span class="badge bg-primary ms-2">{{ temp.category }}</span>
                 </h5>
                 <p class="card-text">商品描述：{{ temp.description }}</p>
                 <p class="card-text">商品內容：{{ temp.content }}</p>
@@ -96,15 +97,7 @@
                 <div class="col-md-4" v-for="(item,i) in temp.imagesUrl" :key="i">
                   <img :src="item" alt="" class="images img-fluid" v-if="item">
                 </div>
-              
-
-             
-
-           
-
-             
-
-              </div>
+               </div>
 
             </div>
 
@@ -116,119 +109,11 @@
   </div>
 
   <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.9.1/axios.min.js'
-      integrity='sha512-Xk3wWei2TGrsh9kDSBKUMIjw/86sLUvhtnv9f7fOuIwhhiUTKz8szkWkzHthrM5Bb3Bu9idSzkxOrkzhcneuiw=='
-      crossorigin='anonymous'></script>
+    integrity='sha512-Xk3wWei2TGrsh9kDSBKUMIjw/86sLUvhtnv9f7fOuIwhhiUTKz8szkWkzHthrM5Bb3Bu9idSzkxOrkzhcneuiw=='
+    crossorigin='anonymous'></script>
 
 
-  <script type="module">
-
-    import { createApp } from 'https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.26/vue.esm-browser.min.js';
-
-
-  const app = createApp({
-
-    data() {
-
-return {
-  products:[],
-  temp:{},
-  apiurl:'https://vue3-course-api.hexschool.io',
-  path:'kurokawa2021'
-
-
-}
-
-    },
-
-
-    methods:{
-
-      check() {
-
-axios.post( `${this.apiurl}/v2/api/user/check`  )
-.then( (res)=> {
-  console.log('認證成功');
-  this.getlist();
-})
-.catch( (err)=> {
-  console.log('認證失敗');
-  window.location = 'index.html';
- 
-})
-
-
-},
-out(){
-
-  axios.post(`${this.apiurl}/v2/logout`)
-  .then( (res) => {
-
-    console.log(res.data);
-    //登出轉向
-    window.location = 'index.html';
-
-  })
-  .catch( (err)=> {
-    console.log(err);
-  } )
-
-
-}
-,
-
-      getlist(){
-
-     
-
-       // https://vue3-course-api.hexschool.io/v2/api/kurokawa2021/admin/products
-        axios.get(`${this.apiurl}/v2/api/${this.path}/admin/products`   )
-        .then( (res) => {
-
-          console.log(res)
-     
-          this.products = res.data.products;
-
-        
-        } )
-        .catch( (err) => {
-          console.log(err)
-        } )
-      }
-
-
-     },
-
-
-    mounted(){
-
-
-      
-           // 取token
-
-           const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-           axios.defaults.headers.common.Authorization = token;
-         
-
-
-      this.check();
-
-
-
-    }
-
-
-  })
-
-  //掛載
-  app.mount('#app');
-
-   
-
-
-   
-
-
-</script>
+  <script type="module" src="checkprList.js"></script>
 </body>
 
 </html>
